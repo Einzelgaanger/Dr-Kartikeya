@@ -26,11 +26,12 @@
         /* Sidebar Styles */
         .sidebar {
             width: 250px;
-            background-color: #2c5282;
+            background-color: #0000ff; /* Blue */
             color: white;
             padding: 2rem 0;
             height: 100vh;
             position: fixed;
+            transition: transform 0.3s ease;
         }
         
         .sidebar-header {
@@ -72,7 +73,7 @@
         }
         
         .nav-links .badge {
-            background-color: #e53e3e;
+            background-color: #bb0000; /* Red */
             color: white;
             border-radius: 9999px;
             padding: 0.25rem 0.75rem;
@@ -85,6 +86,7 @@
             flex: 1;
             padding: 2rem;
             margin-left: 250px;
+            transition: margin-left 0.3s ease;
         }
         
         .dashboard-header {
@@ -96,7 +98,7 @@
         
         .dashboard-header h1 {
             font-size: 1.875rem;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         .dashboard-header .welcome {
@@ -117,6 +119,11 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
         
         .stat-card h3 {
@@ -128,7 +135,7 @@
         .stat-card .stat-value {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         /* Tabs System */
@@ -156,13 +163,13 @@
         }
         
         .tab-btn.active {
-            color: #2c5282;
-            border-bottom-color: #2c5282;
+            color: #0000ff; /* Blue */
+            border-bottom-color: #0000ff; /* Blue */
             background-color: white;
         }
         
         .tab-btn .badge {
-            background-color: #e53e3e;
+            background-color: #bb0000; /* Red */
             color: white;
             border-radius: 9999px;
             padding: 0.25rem 0.75rem;
@@ -193,7 +200,7 @@
         .working-hours-form h3 {
             font-size: 1.125rem;
             margin-bottom: 1rem;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         .form-row {
@@ -223,7 +230,7 @@
         }
         
         .btn {
-            background-color: #3182ce;
+            background-color: #0000ff; /* Blue */
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -234,15 +241,15 @@
         }
         
         .btn:hover {
-            background-color: #2c5282;
+            background-color: #1a237e; /* Darker Blue */
         }
         
         .btn-danger {
-            background-color: #e53e3e;
+            background-color: #bb0000; /* Red */
         }
         
         .btn-danger:hover {
-            background-color: #c53030;
+            background-color: #9a0000; /* Darker Red */
         }
         
         /* Working Hours Display */
@@ -253,7 +260,7 @@
         .working-hours-display h3 {
             font-size: 1.125rem;
             margin-bottom: 1rem;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         .hours-table {
@@ -286,13 +293,18 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             padding: 1.5rem;
-            border-left: 4px solid #3182ce;
+            border-left: 4px solid #0000ff; /* Blue */
+            transition: transform 0.3s ease;
+        }
+        
+        .appointment-card:hover {
+            transform: translateY(-5px);
         }
         
         .appointment-card h3 {
             font-size: 1.125rem;
             margin-bottom: 0.5rem;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         .appointment-card p {
@@ -316,12 +328,12 @@
         
         .appointment-card .status.pending {
             background-color: #fed7d7;
-            color: #e53e3e;
+            color: #bb0000; /* Red */
         }
         
         .appointment-card .status.confirmed {
             background-color: #c6f6d5;
-            color: #38a169;
+            color: #20cc00; /* Green */
         }
         
         .appointment-card .actions {
@@ -341,14 +353,19 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             padding: 1.5rem;
-            border-left: 4px solid #38a169;
+            border-left: 4px solid #20cc00; /* Green */
             margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .patient-card:hover {
+            transform: translateY(-5px);
         }
         
         .patient-card h3 {
             font-size: 1.125rem;
             margin-bottom: 0.5rem;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         .patient-info {
@@ -367,7 +384,7 @@
         }
         
         .treatment-entry {
-            border-left: 2px solid #3182ce;
+            border-left: 2px solid #0000ff; /* Blue */
             padding-left: 1rem;
             margin-bottom: 1rem;
         }
@@ -419,7 +436,7 @@
         
         .modal-header h2 {
             font-size: 1.25rem;
-            color: #2c5282;
+            color: #0000ff; /* Blue */
         }
         
         .modal-close {
@@ -465,6 +482,39 @@
         
         .empty-state p {
             margin-bottom: 1rem;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            background-color: #0000ff; /* Blue */
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -519,6 +569,14 @@
                     <div class="stat-card">
                         <h3>Total Patients</h3>
                         <div class="stat-value" id="totalPatients">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Hours Worked</h3>
+                        <div class="stat-value" id="totalHoursWorked">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Free Hours</h3>
+                        <div class="stat-value" id="freeHours">0</div>
                     </div>
                 </div>
                 
@@ -671,6 +729,50 @@
     </div>
 
     <script>
+
+    // Add this at the beginning of the script
+function initializeMockData() {
+    if (!localStorage.getItem('patients')) {
+        const patients = [
+            { email: 'patient1@example.com', name: 'John Doe', age: 30 },
+            { email: 'patient2@example.com', name: 'Jane Smith', age: 25 }
+        ];
+        localStorage.setItem('patients', JSON.stringify(patients));
+    }
+
+    if (!localStorage.getItem('appointments')) {
+        const appointments = [
+            { id: '1', patientEmail: 'patient1@example.com', day: 'Monday', time: '09:00', medicalIssue: 'Back pain', issueStarted: '2 weeks ago', status: 'pending' },
+            { id: '2', patientEmail: 'patient2@example.com', day: 'Tuesday', time: '10:00', medicalIssue: 'Knee pain', issueStarted: '1 week ago', status: 'pending' }
+        ];
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+    }
+
+    if (!localStorage.getItem('workingHours')) {
+        const workingHours = [
+            { day: 'Monday', startTime: '09:00', endTime: '17:00' },
+            { day: 'Tuesday', startTime: '09:00', endTime: '17:00' }
+        ];
+        localStorage.setItem('workingHours', JSON.stringify(workingHours));
+    }
+
+    if (!localStorage.getItem('patientsInTreatment')) {
+        localStorage.setItem('patientsInTreatment', JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem('treatedPatients')) {
+        localStorage.setItem('treatedPatients', JSON.stringify([]));
+    }
+}
+
+// Call this function in the `init` function
+function init() {
+    initializeMockData();
+    loadWorkingHours();
+    generateAvailableSlots();
+    loadAppointments();
+    setupSearch();
+}
         // DOM Elements
         const tabButtons = document.querySelectorAll('[data-tab]');
         const tabPanes = document.querySelectorAll('.tab-pane');
@@ -979,34 +1081,31 @@
         
         // Handle appointment actions (confirm, reject, reschedule)
         function handleAppointmentAction(action, appointmentId) {
-            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
-            const index = appointments.findIndex(app => app.id === appointmentId);
-            
-            if (index === -1) return;
-            
-            switch (action) {
-                case 'confirm':
-                    appointments[index].status = 'confirmed';
-                    // Remove this slot from available slots
-                    updateAvailableSlots(appointments[index].day, appointments[index].time);
-                    break;
-                    
-                case 'reject':
-                    if (confirm('Are you sure you want to reject this appointment?')) {
-                        appointments.splice(index, 1);
-                    }
-                    break;
-                    
-                case 'reschedule':
-                    // For simplicity, just mark as pending again
-                    appointments[index].status = 'pending';
-                    break;
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    const index = appointments.findIndex(app => app.id === appointmentId);
+
+    if (index === -1) return;
+
+    switch (action) {
+        case 'confirm':
+            appointments[index].status = 'confirmed';
+            updateAvailableSlots(appointments[index].day, appointments[index].time);
+            break;
+
+        case 'reject':
+            if (confirm('Are you sure you want to reject this appointment?')) {
+                appointments.splice(index, 1);
             }
-            
-            localStorage.setItem('appointments', JSON.stringify(appointments));
-            loadAppointments();
-        }
-        
+            break;
+
+        case 'reschedule':
+            appointments[index].status = 'pending';
+            break;
+    }
+
+    localStorage.setItem('appointments', JSON.stringify(appointments));
+    loadAppointments();
+}
         // Update available slots after confirming an appointment
         function updateAvailableSlots(day, time) {
             const availableSlots = JSON.parse(localStorage.getItem('availableSlots') || '[]');
@@ -1025,102 +1124,98 @@
         const saveTreatmentBtn = document.getElementById('saveTreatment');
         
         function openTreatmentModal(appointmentId, patientEmail) {
-            document.getElementById('patientId').value = patientEmail;
-            document.getElementById('appointmentId').value = appointmentId;
-            
-            // Clear form fields
-            document.getElementById('diagnosis').value = '';
-            document.getElementById('treatmentPlan').value = '';
-            document.getElementById('recommendations').value = '';
-            document.getElementById('medications').value = '';
-            document.getElementById('followUpDate').value = '';
-            
-            // Show modal
-            treatmentModal.classList.add('active');
+    document.getElementById('patientId').value = patientEmail;
+    document.getElementById('appointmentId').value = appointmentId;
+
+    // Clear form fields
+    document.getElementById('diagnosis').value = '';
+    document.getElementById('treatmentPlan').value = '';
+    document.getElementById('recommendations').value = '';
+    document.getElementById('medications').value = '';
+    document.getElementById('followUpDate').value = '';
+
+    // Show modal
+    treatmentModal.classList.add('active');
+}
+
+// Save treatment plan
+saveTreatmentBtn.addEventListener('click', function() {
+    const patientEmail = document.getElementById('patientId').value;
+    const appointmentId = document.getElementById('appointmentId').value;
+    const diagnosis = document.getElementById('diagnosis').value;
+    const treatmentPlan = document.getElementById('treatmentPlan').value;
+    const recommendations = document.getElementById('recommendations').value;
+    const medications = document.getElementById('medications').value;
+    const followUpDate = document.getElementById('followUpDate').value;
+
+    if (!diagnosis || !treatmentPlan || !recommendations) {
+        alert('Please fill out all required fields');
+        return;
+    }
+
+    // Get patients in treatment
+    const patientsInTreatment = JSON.parse(localStorage.getItem('patientsInTreatment') || '[]');
+
+    // Check if patient is already in treatment
+    const existingPatientIndex = patientsInTreatment.findIndex(p => p.email === patientEmail);
+
+    if (existingPatientIndex !== -1) {
+        // Add new treatment entry to existing patient
+        patientsInTreatment[existingPatientIndex].treatments.push({
+            id: Date.now().toString(),
+            date: new Date().toISOString(),
+            diagnosis,
+            treatmentPlan,
+            recommendations,
+            medications,
+            followUpDate
+        });
+    } else {
+        // Get patient data
+        const patients = JSON.parse(localStorage.getItem('patients') || '[]');
+        const patient = patients.find(p => p.email === patientEmail);
+
+        if (!patient) {
+            alert('Patient not found');
+            return;
         }
-        
-        closeModalBtn.addEventListener('click', function() {
-            treatmentModal.classList.remove('active');
+
+        // Add new patient in treatment
+        patientsInTreatment.push({
+            email: patientEmail,
+            name: patient.name,
+            age: patient.age,
+            treatments: [{
+                id: Date.now().toString(),
+                date: new Date().toISOString(),
+                diagnosis,
+                treatmentPlan,
+                recommendations,
+                medications,
+                followUpDate
+            }]
         });
-        
-        saveTreatmentBtn.addEventListener('click', function() {
-            const patientEmail = document.getElementById('patientId').value;
-            const appointmentId = document.getElementById('appointmentId').value;
-            const diagnosis = document.getElementById('diagnosis').value;
-            const treatmentPlan = document.getElementById('treatmentPlan').value;
-            const recommendations = document.getElementById('recommendations').value;
-            const medications = document.getElementById('medications').value;
-            const followUpDate = document.getElementById('followUpDate').value;
-            
-            if (!diagnosis || !treatmentPlan || !recommendations) {
-                alert('Please fill out all required fields');
-                return;
-            }
-            
-            // Get patients in treatment
-            const patientsInTreatment = JSON.parse(localStorage.getItem('patientsInTreatment') || '[]');
-            
-            // Check if patient is already in treatment
-            const existingPatientIndex = patientsInTreatment.findIndex(p => p.email === patientEmail);
-            
-            if (existingPatientIndex !== -1) {
-                // Add new treatment entry to existing patient
-                patientsInTreatment[existingPatientIndex].treatments.push({
-                    id: Date.now().toString(),
-                    date: new Date().toISOString(),
-                    diagnosis,
-                    treatmentPlan,
-                    recommendations,
-                    medications,
-                    followUpDate
-                });
-            } else {
-                // Get patient data
-                const patients = JSON.parse(localStorage.getItem('patients') || '[]');
-                const patient = patients.find(p => p.email === patientEmail);
-                
-                if (!patient) {
-                    alert('Patient not found');
-                    return;
-                }
-                
-                // Add new patient in treatment
-                patientsInTreatment.push({
-                    email: patientEmail,
-                    name: patient.name,
-                    age: patient.age,
-                    treatments: [{
-                        id: Date.now().toString(),
-                        date: new Date().toISOString(),
-                        diagnosis,
-                        treatmentPlan,
-                        recommendations,
-                        medications,
-                        followUpDate
-                    }]
-                });
-            }
-            
-            // Update patients in treatment
-            localStorage.setItem('patientsInTreatment', JSON.stringify(patientsInTreatment));
-            
-            // Update appointment status
-            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
-            const appointmentIndex = appointments.findIndex(app => app.id === appointmentId);
-            
-            if (appointmentIndex !== -1) {
-                appointments.splice(appointmentIndex, 1);
-                localStorage.setItem('appointments', JSON.stringify(appointments));
-            }
-            
-            // Close modal
-            treatmentModal.classList.remove('active');
-            
-            // Reload data
-            loadAppointments();
-            loadPatientsInTreatment();
-        });
-        
+    }
+
+    // Update patients in treatment
+    localStorage.setItem('patientsInTreatment', JSON.stringify(patientsInTreatment));
+
+    // Update appointment status
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    const appointmentIndex = appointments.findIndex(app => app.id === appointmentId);
+
+    if (appointmentIndex !== -1) {
+        appointments.splice(appointmentIndex, 1);
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+    }
+
+    // Close modal
+    treatmentModal.classList.remove('active');
+
+    // Reload data
+    loadAppointments();
+    loadPatientsInTreatment();
+});
         // Load patients in treatment
         function loadPatientsInTreatment() {
             const patientsInTreatment = JSON.parse(localStorage.getItem('patientsInTreatment') || '[]');
@@ -1269,7 +1364,26 @@
             loadPatientsInTreatment();
             loadTreatedPatients();
         }
-        
+        function updateAnalysisTable() {
+    const workingHours = JSON.parse(localStorage.getItem('workingHours') || '[]');
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+
+    let totalHours = 0;
+    workingHours.forEach(hour => {
+        const start = new Date(`1970-01-01T${hour.startTime}:00`);
+        const end = new Date(`1970-01-01T${hour.endTime}:00`);
+        totalHours += (end - start) / (1000 * 60 * 60);
+    });
+
+    const bookedHours = appointments.filter(app => app.status === 'confirmed').length * 0.5; // Assuming 30-minute slots
+    const freeHours = totalHours - bookedHours;
+
+    document.getElementById('totalHoursWorked').textContent = totalHours.toFixed(1);
+    document.getElementById('freeHours').textContent = freeHours.toFixed(1);
+}
+
+// Call this function whenever data changes
+updateAnalysisTable();
         // Load treated patients
         function loadTreatedPatients() {
             const treatedPatients = JSON.parse(localStorage.getItem('treatedPatients') || '[]');
@@ -1474,6 +1588,27 @@
             }
         }
         
+
+        function updateCounters() {
+    const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    const pendingAppointments = appointments.filter(app => app.status === 'pending');
+    const confirmedAppointments = appointments.filter(app => app.status === 'confirmed');
+    const patientsInTreatment = JSON.parse(localStorage.getItem('patientsInTreatment') || '[]');
+    const treatedPatients = JSON.parse(localStorage.getItem('treatedPatients') || '[]');
+
+    document.getElementById('totalAppointments').textContent = appointments.length;
+    document.getElementById('pendingAppointmentsCount').textContent = pendingAppointments.length;
+    document.getElementById('pendingAppointmentsBadge').textContent = pendingAppointments.length;
+    document.getElementById('pendingAppointmentsTabBadge').textContent = pendingAppointments.length;
+    document.getElementById('upcomingAppointmentsCount').textContent = confirmedAppointments.length;
+    document.getElementById('upcomingAppointmentsBadge').textContent = confirmedAppointments.length;
+    document.getElementById('inTreatmentCount').textContent = patientsInTreatment.length;
+    document.getElementById('inTreatmentBadge').textContent = patientsInTreatment.length;
+    document.getElementById('treatedBadge').textContent = treatedPatients.length;
+}
+
+// Call this function whenever data changes
+updateCounters();
         // Filter patients by search term
         function filterPatients(type, searchTerm) {
             let patients;

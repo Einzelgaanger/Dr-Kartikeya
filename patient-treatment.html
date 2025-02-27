@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Treatment - Dr. Smith's Orthopedic Care</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c5282;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: #4a5568;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #2c5282;
+        }
+        
+        .nav-link.active {
+            color: #2c5282;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        .page-title {
+            color: #2c5282;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: #2c5282;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .status-label {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .status-in-treatment {
+            background-color: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .status-treated {
+            background-color: #e9d8fd;
+            color: #6b46c1;
+        }
+        
+        .treatment-session {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #3182ce;
+        }
+        
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        
+        .session-date {
+            font-weight: 600;
+            color: #2c5282;
+        }
+        
+        .session-content {
+            margin-top: 1rem;
+        }
+        
+        .session-content p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #2c5282;
+        }
+        
+        .logout-btn {
+            background-color: #e53e3e;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c53030;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #718096;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #cbd5e0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3182ce;
+            border: 2px solid #ebf8ff;
+        }
+        
+        .timeline-date {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">Dr. Smith's Orthopedic Care</div>
+            <div class="nav-links">
+                <a href="patient-homepage.html" class="nav-link">Home</a>
+                <a href="patient-appointments.html" class="nav-link">My Appointments</a>
+                <a href="patient-treatment.html" class="nav-link active">Treatment</a>
+            </div>
+            <div class="user-info">
+                Welcome, <span id="patientName">Guest</span>
+                <button class="btn logout-btn" style="margin-left: 10px; padding: 0.3rem 0.6rem; font-size: 0.8rem;" id="logoutBtn">Logout</button>
+            </div>
+        </nav>
+        
+        <h1 class="page-title">My Treatment</h1>
+        
+        <div class="card" id="currentStatusCard">
+            <h2 class="section-title">Current Status</h2>
+            <div id="statusContent">
+                <!-- Current status will be displayed here -->
+            </div>
+        </div>
+        
+        <div class="card" id="treatmentHistoryCard">
+            <h2 class="section-title">Treatment History</h2>
+            <div id="treatmentTimeline" class="timeline">
+                <!-- Treatment timeline will be displayed here -->
+            </div>
+        </div>
+        
+        <div class="card" id="treatmentSessionsCard">
+            <h2 class="section-title">Treatment Sessions</h2>
+            <div id="treatmentSessions">
+                <!-- Treatment sessions will be displayed here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const patientNameEl = document.getElementById('patientName');
+        const statusContentEl = document.getElementById('statusContent');
+        const treatmentTimelineEl = document.getElementById('treatmentTimeline');
+        const treatmentSessionsEl = document.getElementById('treatmentSessions');
+        
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
+            
+            if (!currentPatient) {
+                // Redirect to login page if not logged in
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Update UI with patient name
+            patientNameEl.textContent = currentPatient.name;
+            
+            // Load treatment data
+            loadTreatmentData(currentPatient);
+        });
+        
+        // Logout button
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('currentPatient');
+            window.location.href = 'index.html';
+        });
+        
+        // Load and display treatment data
+        function loadTreatmentData(patient) {
+            if (!patient.appointments || patient.appointments.length === 0) {
+                // No appointments, show empty state
+                statusContentEl.innerHTML = '<div class="empty-state">You have no active treatments</div>';
+                treatmentTimelineEl.innerHTML = '<div class="empty-state">No treatment history available</div>';
+                treatmentSessionsEl.innerHTML = '<div class="empty-state">No treatment sessions yet</div>';
+                return;
+            }
+            
+            // Filter treatment appointments (in-treatment or treated)
+            const treatmentAppointments = patient.appointments.filter(
+                app => app.status === 'in-treatment' || app.status === 'treated'
+            );
+            
+            if (treatmentAppointments.length === 0) {
+                // No treatment appointments, show empty state
+                statusContentEl.innerHTML = '<div class="empty-state">You have no active treatments yet</div>';
+                treatmentTimelineEl.innerHTML = '<div class="empty-state">No treatment history available</div>';
+                treatmentSessionsEl.innerHTML = '<div class="empty-state">No treatment sessions yet</div>';
+                return;
+            }
+            
+            // Sort by date (newest first)
+            const sortedAppointments = [...treatmentAppointments].sort((a, b) => {
+                return new Date(b.confirmedSlot) - new Date(a.confirmedSlot);
+            });
+            
+            // Get latest appointment for current status
+            const latestAppointment = sortedAppointments[0];
+            const statusClass = latestAppointment.status === 'in-treatment' ? 'status-in-treatment' : 'status-treated';
+            const statusText = latestAppointment.status === 'in-treatment' ? 'In Treatment' : 'Treated';
+            
+            // Display current status
+            statusContentEl.innerHTML = `
+                <div class="status-label ${statusClass}">${statusText}</div>
+                <p><strong>Current Medical Issue:</strong> ${latestAppointment.medicalIssue}</p>
+                <p><strong>Issue Started:</strong> ${formatDate(latestAppointment.issueStartDate)}</p>
+                <p><strong>Doctor's Recommendations:</strong> ${latestAppointment.doctorRecommendations || 'None provided yet'}</p>
+                <p><strong>Subscription Details:</strong> ${latestAppointment.subscriptionDetails || 'None provided yet'}</p>
+            `;
+            
+            // Display treatment timeline
+            if (sortedAppointments.length > 0) {
+                treatmentTimelineEl.innerHTML = '';
+                
+                // Add events to timeline
+                sortedAppointments.forEach(appointment => {
+                    // Add appointment confirmation
+                    const timelineItemEl = document.createElement('div');
+                    timelineItemEl.className = 'timeline-item';
+                    
+                    timelineItemEl.innerHTML = `
+                        <div class="timeline-date">${formatDate(appointment.confirmedSlot)}</div>
+                        <div class="timeline-content">
+                            <p><strong>Appointment ${appointment.status === 'treated' ? 'Completed' : 'Started'}</strong></p>
+                            <p>${appointment.medicalIssue}</p>
+                        </div>
+                    `;
+                    
+                    treatmentTimelineEl.appendChild(timelineItemEl);
+                    
+                    // Add status change events if available
+                    if (appointment.statusHistory) {
+                        appointment.statusHistory.forEach(statusChange => {
+                            const statusItemEl = document.createElement('div');
+                            statusItemEl.className = 'timeline-item';
+                            
+                            statusItemEl.innerHTML = `
+                                <div class="timeline-date">${formatDate(statusChange.date)}</div>
+                                <div class="timeline-content">
+                                    <p><strong>Status Changed:</strong> ${statusChange.from} → ${statusChange.to}</p>
+                                    <p>${statusChange.notes || ''}</p>
+                                </div>
+                            `;
+                            
+                            treatmentTimelineEl.appendChild(statusItemEl);
+                        });
+                    }
+                });
+            } else {
+                treatmentTimelineEl.innerHTML = '<div class="empty-state">No treatment history available</div>';
+            }
+            
+            // Display treatment sessions
+            if (sortedAppointments.length > 0) {
+                treatmentSessionsEl.innerHTML = '';
+                
+                sortedAppointments.forEach(appointment => {
+                    const sessionEl = document.createElement('div');
+                    sessionEl.className = 'treatment-session';
+                    
+                    sessionEl.innerHTML = `
+                        <div class="session-header">
+                            <div class="session-date">${formatDateWithTime(appointment.confirmedSlot)}</div>
+                            <div class="status-label ${appointment.status === 'in-treatment' ? 'status-in-treatment' : 'status-treated'}">
+                                ${appointment.status === 'in-treatment' ? 'In Treatment' : 'Treated'}
+                            </div>
+                        </div>
+                        <div><strong>Medical Issue:</strong> ${appointment.medicalIssue}</div>
+                        <div class="session-content">
+                            <p><strong>Doctor's Recommendations:</strong> ${appointment.doctorRecommendations || 'None provided yet'}</p>
+                            <p><strong>Subscription Details:</strong> ${appointment.subscriptionDetails || 'None provided yet'}</p>
+                            <p><strong>Notes:</strong> ${appointment.doctorNotes || 'No additional notes'}</p>
+                        </div>
+                    `;
+                    
+                    treatmentSessionsEl.appendChild(sessionEl);
+                });
+            } else {
+                treatmentSessionsEl.innerHTML = '<div class="empty-state">No treatment sessions yet</div>';
+            }
+        }
+        
+        // Helper functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+        
+        function formatDateWithTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric'
+            });
+        }
+        
+        // Function to download treatment summary
+        function downloadTreatmentSummary() {
+            const currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
+            if (!currentPatient || !currentPatient.appointments) {
+                alert('No treatment data available to download');
+                return;
+            }
+            
+            // Filter treatment appointments
+            const treatmentAppointments = currentPatient.appointments.filter(
+                app => app.status === 'in-treatment' || app.status === 'treated'
+            );
+            
+            if (treatmentAppointments.length === 0) {
+                alert('No treatment data available to download');
+                return;
+            }
+            
+            // Create text content for the summary
+            let summaryContent = `TREATMENT SUMMARY FOR ${currentPatient.name}\n`;
+            summaryContent += `Generated on: ${new Date().toLocaleString()}\n\n`;
+            
+            treatmentAppointments.forEach((appointment, index) => {
+                summaryContent += `==== TREATMENT SESSION ${index + 1} ====\n`;
+                summaryContent += `Date: ${new Date(appointment.confirmedSlot).toLocaleString()}\n`;
+                summaryContent += `Status: ${appointment.status}\n`;
+                summaryContent += `Medical Issue: ${appointment.medicalIssue}\n`;
+                summaryContent += `Doctor's Recommendations: ${appointment.doctorRecommendations || 'None provided'}\n`;
+                summaryContent += `Subscription Details: ${appointment.subscriptionDetails || 'None provided'}\n`;
+                summaryContent += `Notes: ${appointment.doctorNotes || 'No additional notes'}\n\n`;
+            });
+            
+            // Create a blob and download link
+            const blob = new Blob([summaryContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `treatment_summary_${currentPatient.name.replace(/\s+/g, '_')}.txt`;
+            a.click();
+            
+            // Clean up
+            URL.revokeObjectURL(url);
+        }
+        
+        // Add download button to the page
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadBtn = document.createElement('button');
+            downloadBtn.className = 'btn';
+            downloadBtn.textContent = 'Download Treatment Summary';
+            downloadBtn.style.marginTop = '1rem';
+            downloadBtn.addEventListener('click', downloadTreatmentSummary);
+            
+            const currentStatusCard = document.getElementById('currentStatusCard');
+            currentStatusCard.appendChild(downloadBtn);
+        });
+    </script>
+</body>
+</html>

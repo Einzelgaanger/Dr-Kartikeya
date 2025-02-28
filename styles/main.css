@@ -1,12 +1,54 @@
+/* 
+* Enhanced CSS with Professional UI/UX Design Principles
+* - Minimalistic theme with a soft color palette
+* - Restored background image
+* - Scrollable form for laptops
+* - Clean and professional design
+*/
+
+/* Base Variables */
 :root {
-    --primary-color: #3498db;
-    --primary-dark: #2980b9;
-    --text-color: #2c3e50;
-    --error-color: #e74c3c;
-    --border-color: #e1e8ed;
-    --transition: 0.3s ease;
+    /* Primary Colors (Minimalistic) */
+    --primary-color: #4a90e2; /* Soft blue for trust and calmness */
+    --primary-light: #6fa8dc; /* Lighter blue for accents */
+    --primary-dark: #357abd; /* Darker blue for contrast */
+
+    /* Text Colors */
+    --text-dark: #333333; /* Dark gray for readability */
+    --text-light: #f5f5f5; /* Light gray for contrast */
+    --text-muted: #777777; /* Muted gray for secondary text */
+
+    /* Background Colors */
+    --bg-light: #f0f4f8; /* Light, soft background */
+    --bg-dark: rgba(0, 0, 0, 0.65); /* Dark overlay for contrast */
+
+    /* States */
+    --error-color: #ff6b6b; /* Soft red for errors */
+    --success-color: #4caf50; /* Soft green for success */
+
+    /* Structure */
+    --border-color: #d1d8e0; /* Light gray for borders */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+    /* Spacing & Sizing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -14,82 +56,108 @@
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-image: url('../assets/bcimage.png');
-    background-size: cover; /* Ensures the image covers the entire screen */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents tiling */
-    background-color: transparent; /* Ensure no background color overrides the image */
-    color: var(--text-color);
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background-image: url('../assets/bcimage.png'); /* Restored background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps background fixed while scrolling */
+    color: var(--text-dark);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers content horizontally */
+    justify-content: center;
+    padding: var(--spacing-md);
+    filter: none
 }
 
 .container {
     width: 100%;
-    padding: 10px;
+    max-width: 1200px;
+    padding: var(--spacing-md);
     margin: 0 auto;
 }
 
+/* Authentication Container */
 .auth-container {
-    background: white;
-    padding: 1.25rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white for minimalism */
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px var(--shadow-color);
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border-color); /* Subtle border */
+    max-height: 90vh; /* Limit height for scrollability */
+    overflow-y: auto; /* Make form scrollable */
 }
 
+/* Header Elements */
 .auth-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .logo {
-    width: 300px;
-    height: 300px;
-    margin-bottom: 0.5rem;
+    width: 120px; /* Smaller for mobile */
+    height: 120px;
+    margin-bottom: var(--spacing-md);
+    border-radius: 50%;
+    box-shadow: 0 6px 15px var(--shadow-color);
+    transition: var(--transition-medium);
+}
+
+.logo:hover {
+    transform: scale(1.02);
 }
 
 h1 {
-    color: var(--text-color);
-    font-size: 1.4rem;
-    margin-bottom: 0.2rem;
+    color: var(--primary-color); /* Primary color for headings */
+    font-size: 1.75rem; /* Smaller for mobile */
+    margin-bottom: var(--spacing-sm);
     font-weight: 600;
 }
 
 .subtitle {
-    color: #666;
-    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-size: 0.9rem; /* Smaller for mobile */
+    opacity: 0.9;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
+/* Tabs Navigation */
 .auth-tabs {
     display: flex;
     position: relative;
-    margin-bottom: 1.25rem;
+    margin-bottom: var(--spacing-lg);
     border-bottom: 2px solid var(--border-color);
 }
 
 .tab-btn {
     flex: 1;
-    padding: 0.7rem;
+    padding: var(--spacing-md);
     background: none;
     border: none;
-    color: #666;
+    color: var(--text-muted);
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-fast);
+    position: relative;
+    opacity: 0.7;
+}
+
+.tab-btn:hover {
+    opacity: 0.9;
 }
 
 .tab-btn.active {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Primary color for active tab */
+    opacity: 1;
 }
 
 .tab-indicator {
@@ -99,12 +167,14 @@ h1 {
     width: 50%;
     height: 2px;
     background: var(--primary-color);
-    transition: var(--transition);
+    transition: var(--transition-medium);
 }
 
+/* Forms Container */
 .forms-container {
     position: relative;
-    height: 210px;
+    min-height: 200px;
+    transition: var(--transition-medium);
 }
 
 .auth-form {
@@ -112,8 +182,8 @@ h1 {
     width: 100%;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(50px);
-    transition: var(--transition);
+    transform: translateX(20px);
+    transition: var(--transition-medium);
 }
 
 .auth-form.active {
@@ -122,158 +192,124 @@ h1 {
     transform: translateX(0);
 }
 
+/* Form Groups & Fields */
 .form-group {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.6rem;
+    padding: var(--spacing-md);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: var(--transition);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    transition: var(--transition-medium);
+    background: var(--text-light);
+    color: var(--text-dark);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
 .form-group label {
     position: absolute;
-    left: 12px;
+    left: var(--spacing-md);
     top: 50%;
     transform: translateY(-50%);
-    color: #666;
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
     pointer-events: none;
-    transition: var(--transition);
-    background: transparent;
-    padding: 0 2px;
-}
-
-.form-group input:focus,
-.form-group input:valid {
-    border-color: var(--primary-color);
-    padding-top: 0.9rem;
-    padding-bottom: 0.3rem;
+    transition: var(--transition-medium);
+    padding: 0 var(--spacing-xs);
 }
 
 .form-group input:focus + label,
 .form-group input:valid + label {
-    top: -5px;
+    top: 0;
     font-size: 0.75rem;
     color: var(--primary-color);
-    background-color: white;
-    z-index: 1;
+    background-color: var(--text-light);
+    font-weight: 500;
 }
 
+/* Submit Button */
 .submit-btn {
     width: 100%;
-    padding: 0.8rem;
+    padding: var(--spacing-md);
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-light);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: var(--transition);
+    transition: var(--transition-medium);
+    box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 .submit-btn:hover {
     background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow-color);
 }
 
-.btn-icon {
-    transition: var(--transition);
-}
-
-.submit-btn:hover .btn-icon {
-    transform: translateX(4px);
-}
-
+/* Error Messages */
 .error {
     color: var(--error-color);
-    font-size: 0.8rem;
-    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    margin-top: var(--spacing-sm);
     text-align: center;
-    min-height: 16px;
+    min-height: 20px;
+    font-weight: 500;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: var(--transition-medium);
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+.error.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.error-shake {
-    animation: shake 0.5s ease-in-out;
-}
-
-/* Mobile-specific optimizations */
-@media (max-width: 480px) {
+/* Responsive Styles */
+@media (max-width: 768px) {
     .auth-container {
-        padding: 1rem;
-        border-radius: 12px;
-        max-width: 95%;
+        padding: var(--spacing-lg);
+        max-width: 450px;
     }
-    
+
     .logo {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
     }
-    
+
     h1 {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
-    
+
     .subtitle {
-        font-size: 0.75rem;
-    }
-    
-    .tab-btn {
-        padding: 0.6rem;
-        font-size: 0.9rem;
-    }
-    
-    .forms-container {
-        height: 200px;
-    }
-    
-    .form-group {
-        margin-bottom: 0.8rem;
-    }
-    
-    .form-group input {
-        padding: 0.55rem;
         font-size: 0.85rem;
     }
-    
-    .form-group input:focus + label,
-    .form-group input:valid + label {
-        top: -4px;
-    }
-    
-    .submit-btn {
-        padding: 0.7rem;
+
+    .tab-btn {
+        padding: var(--spacing-sm);
         font-size: 0.9rem;
     }
-}
 
-/* Extra small devices */
-@media (max-width: 320px) {
-    .logo {
-        width: 130px;
-        height: 130px;
+    .form-group input {
+        padding: 0.8rem;
+        font-size: 0.95rem;
     }
-    
-    h1 {
-        font-size: 1.1rem;
-    }
-    
-    .forms-container {
-        height: 190px;
+
+    .submit-btn {
+        padding: 0.8rem;
+        font-size: 0.95rem;
     }
 }

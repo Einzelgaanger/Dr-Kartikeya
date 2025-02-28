@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="../styles/patient.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1>Patient Dashboard</h1>
+            <button id="bookAppointmentBtn" class="primary-btn">Book Appointment</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="doctor-info">
+            <div class="doctor-profile">
+                <img src="../assets/doctor-avatar.jpg" alt="Doctor's profile">
+                <div class="doctor-details">
+                    <h2>Dr. John Smith</h2>
+                    <p>Orthopedic Specialist</p>
+                    <p>20+ years of experience</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="appointments-section">
+            <h2>Your Appointments</h2>
+            <div id="appointmentsList"></div>
+        </section>
+    </main>
+
+    <!-- Appointment Booking Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <h2>Book Appointment</h2>
+            <p>Modal Content Here</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../scripts/utils/storage-manager.js"></script>
+    <script src="../scripts/patient.js"></script>
+</body>
+</html>

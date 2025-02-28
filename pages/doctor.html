@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrthoCare - Doctor Dashboard</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/doctor.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <h2>OrthoCare - Doctor Dashboard</h2>
+            <div class="user-info">
+                <span>Dr. John Doe</span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Appointments Section First -->
+        <section class="appointments-section">
+            <h2>Appointments Management</h2>
+            <div class="appointments-tabs">
+                <button class="tab-btn active" data-tab="pending">
+                    Pending <span class="count" id="pendingCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="upcoming">
+                    Upcoming <span class="count" id="upcomingCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="treatment">
+                    In Treatment <span class="count" id="treatmentCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="treated">
+                    Treated <span class="count" id="treatedCount">0</span>
+                </button>
+            </div>
+            <div id="appointmentsList" class="appointments-list">
+                <!-- Appointments will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="analytics-section">
+            <h2>Weekly Overview</h2>
+            <div class="analytics-grid">
+                <div class="stat-card">
+                    <h3>Total Appointments</h3>
+                    <p id="totalAppointments">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Hours Worked</h3>
+                    <p id="hoursWorked">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Available Hours</h3>
+                    <p id="availableHours">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Working Hours Section Last -->
+        <section class="working-hours-section">
+            <div class="section-header">
+                <h2>Working Hours</h2>
+                <button id="setHoursBtn" class="primary-btn">Set Hours</button>
+            </div>
+            <div class="working-hours-grid" id="workingHoursDisplay">
+                <!-- Working hours will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Working Hours Modal -->
+    <div id="workingHoursModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manage Working Hours</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="default">Default Hours</button>
+                    <button class="tab-btn" data-tab="block">Block Time</button>
+                </div>
+
+                <!-- Default Hours Tab -->
+                <div class="tab-content active" id="defaultHours">
+                    <form id="defaultHoursForm">
+                        <div class="days-grid">
+                            <!-- Will be populated with working hours -->
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="primary-btn">Save Default Hours</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Block Time Tab -->
+                <div class="tab-content" id="blockTime">
+                    <div class="block-time-form">
+                        <div class="form-group">
+                            <label>Select Day</label>
+                            <select id="blockDaySelect" class="styled-select">
+                                <option value="">Choose a day</option>
+                            </select>
+                        </div>
+                        <div class="time-slots-container">
+                            <h3>Available Time Slots</h3>
+                            <div id="availableTimeSlots" class="time-slots-grid">
+                                <!-- Will be populated with time slots -->
+                            </div>
+                        </div>
+                        <div class="blocked-slots-preview">
+                            <h3>Currently Blocked</h3>
+                            <div id="blockedSlotsList">
+                                <!-- Will show currently blocked slots -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Treatment Modal -->
+    <div id="treatmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Update Treatment</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="treatmentForm">
+                <div class="patient-info">
+                    <h3 id="patientName"></h3>
+                    <p id="patientIssue"></p>
+                </div>
+                <div class="form-group">
+                    <label for="prescription">Prescription</label>
+                    <textarea id="prescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recommendations">Recommendations</label>
+                    <textarea id="recommendations" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Schedule Follow-up (Optional)</label>
+                    <div class="follow-up-selector">
+                        <select id="followUpDay">
+                            <option value="">Select Day</option>
+                        </select>
+                        <div id="followUpSlots" class="time-slots">
+                            <!-- Time slots will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Save Treatment</button>
+                    <button type="button" id="markTreatedBtn" class="secondary-btn">
+                        Mark as Treated
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Appointment</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="patient-info">
+                <h3 id="confirmPatientName"></h3>
+                <p id="confirmPatientIssue"></p>
+            </div>
+            <div class="preferred-slots">
+                <h4>Select one of the preferred time slots:</h4>
+                <div id="preferredSlotsList" class="time-slots">
+                    <!-- Preferred slots will be loaded here -->
+                </div>
+            </div>
+            <div class="form-actions">
+                <button id="confirmSlotBtn" class="primary-btn">Confirm Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/storage.js"></script>
+    <script src="../scripts/doctor.js"></script>
+</body>
+</html> 

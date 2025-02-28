@@ -1,7 +1,6 @@
 :root {
     --primary-color: #3498db;
     --primary-dark: #2980b9;
-    --background-color: #f5f6fa;
     --text-color: #2c3e50;
     --error-color: #e74c3c;
     --border-color: #e1e8ed;
@@ -16,27 +15,32 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-image: url('./assets/bcimage.png');
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-color: transparent; /* Ensure no background color overrides the image */
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center; /* Centers content horizontally */
 }
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    padding: 10px;
     margin: 0 auto;
-    padding: 20px;
 }
 
 .auth-container {
     background: white;
-    padding: 2.5rem;
+    padding: 1.25rem;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    max-width: 450px;
+    width: 100%;
+    max-width: 420px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -44,37 +48,37 @@ body {
 
 .auth-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1rem;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 0.5rem;
 }
 
 h1 {
     color: var(--text-color);
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
     font-weight: 600;
 }
 
 .subtitle {
     color: #666;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .auth-tabs {
     display: flex;
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     border-bottom: 2px solid var(--border-color);
 }
 
 .tab-btn {
     flex: 1;
-    padding: 1rem;
+    padding: 0.7rem;
     background: none;
     border: none;
     color: #666;
@@ -100,7 +104,7 @@ h1 {
 
 .forms-container {
     position: relative;
-    height: 300px;
+    height: 210px;
 }
 
 .auth-form {
@@ -120,15 +124,15 @@ h1 {
 
 .form-group {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: var(--transition);
 }
 
@@ -138,27 +142,32 @@ h1 {
     top: 50%;
     transform: translateY(-50%);
     color: #666;
+    font-size: 0.9rem;
     pointer-events: none;
     transition: var(--transition);
+    background: transparent;
+    padding: 0 2px;
 }
 
 .form-group input:focus,
 .form-group input:valid {
     border-color: var(--primary-color);
-    padding-top: 1.2rem;
-    padding-bottom: 0.4rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.3rem;
 }
 
 .form-group input:focus + label,
 .form-group input:valid + label {
-    top: 0;
-    font-size: 0.8rem;
+    top: -5px;
+    font-size: 0.75rem;
     color: var(--primary-color);
+    background-color: white;
+    z-index: 1;
 }
 
 .submit-btn {
     width: 100%;
-    padding: 1rem;
+    padding: 0.8rem;
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -175,7 +184,6 @@ h1 {
 
 .submit-btn:hover {
     background-color: var(--primary-dark);
-    transform: translateY(-1px);
 }
 
 .btn-icon {
@@ -188,10 +196,10 @@ h1 {
 
 .error {
     color: var(--error-color);
-    font-size: 0.9rem;
-    margin-top: 1rem;
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
     text-align: center;
-    min-height: 20px;
+    min-height: 16px;
 }
 
 @keyframes shake {
@@ -202,4 +210,70 @@ h1 {
 
 .error-shake {
     animation: shake 0.5s ease-in-out;
-} 
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1rem;
+        border-radius: 12px;
+        max-width: 95%;
+    }
+    
+    .logo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    h1 {
+        font-size: 1.2rem;
+    }
+    
+    .subtitle {
+        font-size: 0.75rem;
+    }
+    
+    .tab-btn {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    .forms-container {
+        height: 200px;
+    }
+    
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+    
+    .form-group input {
+        padding: 0.55rem;
+        font-size: 0.85rem;
+    }
+    
+    .form-group input:focus + label,
+    .form-group input:valid + label {
+        top: -4px;
+    }
+    
+    .submit-btn {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 320px) {
+    .logo {
+        width: 130px;
+        height: 130px;
+    }
+    
+    h1 {
+        font-size: 1.1rem;
+    }
+    
+    .forms-container {
+        height: 190px;
+    }
+}

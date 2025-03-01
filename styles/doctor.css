@@ -53,7 +53,7 @@ body {
 
 /* Header Styles */
 .header {
-    background-color: rgba(0, 0, 0, 0.83);
+    background-color: #0000ff;
     color: var(--white);
     padding: var(--spacing-md);
     box-shadow: var(--shadow);

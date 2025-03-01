@@ -81,7 +81,7 @@ body {
 
 /* Authentication Container */
 .auth-container {
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white for minimalism */
+    background: rgba(255, 255, 255, 1); /* Semi-transparent white for minimalism */
     padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 30px var(--shadow-color);

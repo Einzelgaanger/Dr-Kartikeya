@@ -23,27 +23,27 @@
         </div>
     </header>
 
+    <!-- Weekly Overview -->
+    <section class="weekly-overview">
+        <h2><i class="fas fa-chart-line"></i> Weekly Overview</h2>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3><i class="fas fa-calendar-check"></i> Total Appointments</h3>
+                <p id="totalAppointments">12</p>
+            </div>
+            <div class="overview-card">
+                <h3><i class="fas fa-clock"></i> Hours Worked</h3>
+                <p id="hoursWorked">27</p>
+            </div>
+            <div class="overview-card">
+                <h3><i class="fas fa-hourglass-half"></i> Available Hours</h3>
+                <p id="availableHours">11</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Weekly Overview -->
-        <section class="weekly-overview">
-            <h2><i class="fas fa-chart-line"></i> Weekly Overview</h2>
-            <div class="overview-grid">
-                <div class="overview-card">
-                    <h3><i class="fas fa-calendar-check"></i> Total Appointments</h3>
-                    <p id="totalAppointments">12</p>
-                </div>
-                <div class="overview-card">
-                    <h3><i class="fas fa-clock"></i> Hours Worked</h3>
-                    <p id="hoursWorked">27</p>
-                </div>
-                <div class="overview-card">
-                    <h3><i class="fas fa-hourglass-half"></i> Available Hours</h3>
-                    <p id="availableHours">11</p>
-                </div>
-            </div>
-        </section>
-
         <!-- Appointments Management -->
         <section class="appointments-section">
             <h2><i class="fas fa-calendar-alt"></i> Appointments Management</h2>
@@ -64,8 +64,8 @@
             <div id="appointmentsList" class="appointments-list"></div>
         </section>
     </main>
-    
 
+   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
         // Initialize the appointment counts

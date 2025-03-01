@@ -6,6 +6,9 @@
     <title>Dr. Kartikeya Joshi - Orthopedic Specialist</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="../styles/patient.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta name="description" content="Dr. Kartikeya Joshi - Your trusted orthopedic specialist with over 15 years of experience in joint replacement and sports injury treatments.">
     <meta name="keywords" content="orthopedic, doctor, joint replacement, sports injury, orthopedic surgery, Dr. Kartikeya Joshi">
     <meta name="author" content="Dr. Kartikeya Joshi">
@@ -21,11 +24,11 @@
             </div>
             <nav class="header-right">
                 <ul class="nav-links">
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#appointments">Appointments</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about"><i class="fas fa-user-md"></i> About</a></li>
+                    <li><a href="#services"><i class="fas fa-tools"></i> Services</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+                    <li><a href="#appointments"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -36,7 +39,7 @@
         <div class="hero-content">
             <h2>Welcome to My Practice</h2>
             <p>With over 15 years of experience, I am dedicated to providing the highest quality orthopedic care to my patients. Let’s work together to restore your mobility and improve your quality of life.</p>
-            <a href="#appointments" class="cta-button">Book an Appointment</a>
+            <a href="#appointments" class="cta-button"><i class="fas fa-calendar-alt"></i> Book an Appointment</a>
         </div>
     </section>
 
@@ -52,9 +55,9 @@
                     <p>Hello, I’m Dr. Kartikeya Joshi, a board-certified orthopedic surgeon specializing in joint replacement and sports injury treatments. I completed my medical degree from Harvard Medical School and have been practicing for over 15 years.</p>
                     <p>My mission is to provide personalized care to each of my patients, ensuring they receive the best possible treatment for their condition. I believe in a holistic approach to healthcare, combining advanced medical techniques with compassionate care.</p>
                     <ul class="achievements">
-                        <li>🏆 Awarded "Best Orthopedic Surgeon" by the National Medical Association (2022)</li>
-                        <li>📚 Published over 50 research papers in leading medical journals</li>
-                        <li>🏅 Certified by the American Board of Orthopedic Surgery</li>
+                        <li><i class="fas fa-trophy"></i> Awarded "Best Orthopedic Surgeon" by the National Medical Association (2022)</li>
+                        <li><i class="fas fa-book"></i> Published over 50 research papers in leading medical journals</li>
+                        <li><i class="fas fa-certificate"></i> Certified by the American Board of Orthopedic Surgery</li>
                     </ul>
                 </div>
             </div>
@@ -67,18 +70,22 @@
             <h2>My Services</h2>
             <div class="services-grid">
                 <div class="service-card">
+                    <i class="fas fa-bone"></i>
                     <h3>Joint Replacement</h3>
                     <p>Advanced surgical procedures for hip, knee, and shoulder replacements to restore mobility and reduce pain.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fas fa-running"></i>
                     <h3>Sports Injury Treatment</h3>
                     <p>Comprehensive care for athletes, including ACL reconstruction, rotator cuff repair, and more.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fas fa-microscope"></i>
                     <h3>Arthroscopic Surgery</h3>
                     <p>Minimally invasive procedures to diagnose and treat joint problems with faster recovery times.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fas fa-stethoscope"></i>
                     <h3>Orthopedic Consultations</h3>
                     <p>Personalized consultations to diagnose and plan treatment for musculoskeletal conditions.</p>
                 </div>
@@ -92,14 +99,17 @@
             <h2>What My Patients Say</h2>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
                     <p>"Dr. Doe is an exceptional surgeon. He replaced my knee, and I’m back to walking pain-free!"</p>
                     <p class="author">- Sarah T.</p>
                 </div>
                 <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
                     <p>"I had a sports injury, and Dr. Doe’s treatment got me back on the field in no time."</p>
                     <p class="author">- Michael R.</p>
                 </div>
                 <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
                     <p>"His compassionate care and expertise made all the difference in my recovery."</p>
                     <p class="author">- Emily L.</p>
                 </div>
@@ -112,8 +122,8 @@
         <div class="appointments-content">
             <h2>Appointments</h2>
             <div class="appointments-tabs">
-                <button class="tab-btn active" data-tab="book">Book Appointment</button>
-                <button class="tab-btn" data-tab="manage">Manage Appointments</button>
+                <button class="tab-btn active" data-tab="book"><i class="fas fa-calendar-plus"></i> Book Appointment</button>
+                <button class="tab-btn" data-tab="manage"><i class="fas fa-tasks"></i> Manage Appointments</button>
             </div>
             <div class="forms-container">
                 <!-- Book Appointment Form -->
@@ -136,17 +146,17 @@
                     </div>
                     <button type="submit" class="submit-btn">
                         <span class="btn-text">Book Now</span>
-                        <span class="btn-icon">→</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                     </button>
                 </form>
 
                 <!-- Manage Appointments Section -->
                 <div id="manageForm" class="auth-form">
                     <div class="appointments-tabs">
-                        <button class="tab-btn active" data-tab="pending">Pending <span class="count" id="pendingCount">0</span></button>
-                        <button class="tab-btn" data-tab="upcoming">Upcoming <span class="count" id="upcomingCount">0</span></button>
-                        <button class="tab-btn" data-tab="treatment">In Treatment <span class="count" id="treatmentCount">0</span></button>
-                        <button class="tab-btn" data-tab="treated">Treated <span class="count" id="treatedCount">0</span></button>
+                        <button class="tab-btn active" data-tab="pending"><i class="fas fa-clock"></i> Pending <span class="count" id="pendingCount">0</span></button>
+                        <button class="tab-btn" data-tab="upcoming"><i class="fas fa-calendar-day"></i> Upcoming <span class="count" id="upcomingCount">0</span></button>
+                        <button class="tab-btn" data-tab="treatment"><i class="fas fa-procedures"></i> In Treatment <span class="count" id="treatmentCount">0</span></button>
+                        <button class="tab-btn" data-tab="treated"><i class="fas fa-check-circle"></i> Treated <span class="count" id="treatedCount">0</span></button>
                     </div>
                     <div id="appointmentsList" class="appointments-list">
                         <!-- Appointments will be loaded here -->
@@ -163,9 +173,9 @@
             <div class="contact-grid">
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
-                    <p>📞 Phone: +254745412402</p>
-                    <p>📧 Email: drkar1011@gmail.com</p>
-                    <p>📍 Address: Doctors Park, B3, 3rd Floor, 3rd Parklands Avenue</p>
+                    <p><i class="fas fa-phone"></i> Phone: +254745412402</p>
+                    <p><i class="fas fa-envelope"></i> Email: drkar1011@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address: Doctors Park, B3, 3rd Floor, 3rd Parklands Avenue</p>
                 </div>
                 <div class="contact-form">
                     <form id="contactForm">
@@ -183,7 +193,7 @@
                         </div>
                         <button type="submit" class="submit-btn">
                             <span class="btn-text">Send Message</span>
-                            <span class="btn-icon">→</span>
+                            <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                         </button>
                     </form>
                 </div>
@@ -196,9 +206,9 @@
         <div class="footer-content">
             <p>© 2025 Dr. Kartikeya Joshi. All rights reserved.</p>
             <ul class="footer-links">
-                <li><a href="#privacy">Privacy Policy</a></li>
-                <li><a href="#terms">Terms of Service</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                <li><a href="#terms"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </div>
     </footer>

@@ -1,8 +1,8 @@
 class StorageManager {
     static DOCTOR_CREDENTIALS = {
-        name: "Dr. Kartikeya Joshi",
+        name: "Dr.KJ",
         age: "***",
-        phone: "###"
+        phone: "***"
     };
 
     static setItem(key, value) {

@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bone & Joints - Welcome</title>
-    <link rel="icon" type="assets/logo.png" href="favicon.png">
+    <title>Bone & Joints</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="styles/main.css"> <!-- Ensure this path is correct -->
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="auth-container">
             <div class="auth-header">
                 <img src="assets/logo.png" alt="Bone & Joints" class="logo">
-                <h1>Welcome to Bone & Joints</h1>
+                <h1>Welcome to Bone and Joints</h1>
                 <p class="subtitle">Exceptional Healthcare Delivered</p>
             </div>
-
             <div class="auth-tabs">
-                <button class="tab-btn active" data-tab="login">Sign In</button>
-                <button class="tab-btn" data-tab="register">New Patient</button>
+                <button class="tab-btn active" data-tab="login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                <button class="tab-btn" data-tab="register"><i class="fas fa-user-plus"></i> New Patient</button>
                 <div class="tab-indicator"></div>
             </div>
             
@@ -26,37 +28,41 @@
                 <!-- Login Form -->
                 <form id="loginForm" class="auth-form active">
                     <div class="form-group">
+                        <i class="fas fa-user"></i>
                         <input type="text" id="loginName" required>
                         <label for="loginName">Full Name</label>
                     </div>
                     <div class="form-group">
+                        <i class="fas fa-phone"></i>
                         <input type="tel" id="loginPhone" required>
                         <label for="loginPhone">Phone Number</label>
                     </div>
                     <button type="submit" class="submit-btn">
                         <span class="btn-text">Sign In</span>
-                        <span class="btn-icon">→</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                     </button>
                     <p id="loginError" class="error"></p>
                 </form>
-
                 <!-- Registration Form -->
                 <form id="registerForm" class="auth-form">
                     <div class="form-group">
+                        <i class="fas fa-user"></i>
                         <input type="text" id="regName" required>
                         <label for="regName">Full Name</label>
                     </div>
                     <div class="form-group">
+                        <i class="fas fa-birthday-cake"></i>
                         <input type="number" id="regAge" min="1" max="120" required>
                         <label for="regAge">Age</label>
                     </div>
                     <div class="form-group">
+                        <i class="fas fa-phone"></i>
                         <input type="tel" id="regPhone" required>
                         <label for="regPhone">Phone Number</label>
                     </div>
                     <button type="submit" class="submit-btn">
                         <span class="btn-text">Create Account</span>
-                        <span class="btn-icon">→</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                     </button>
                     <p id="registerError" class="error"></p>
                 </form>
@@ -67,4 +73,3 @@
     <script src="scripts/main.js"></script>
 </body>
 </html>
-

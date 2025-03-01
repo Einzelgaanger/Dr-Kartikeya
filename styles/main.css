@@ -9,14 +9,14 @@
 /* Base Variables */
 :root {
     /* Primary Colors (Minimalistic) */
-    --primary-color: #4a90e2; /* Soft blue for trust and calmness */
-    --primary-light: #6fa8dc; /* Lighter blue for accents */
-    --primary-dark: #357abd; /* Darker blue for contrast */
+    --primary-color: #0000ff; /* Soft blue for trust and calmness */
+    --primary-light: #0000ff; /* Lighter blue for accents */
+    --primary-dark: #0000ff; /* Darker blue for contrast */
 
     /* Text Colors */
-    --text-dark: #333333; /* Dark gray for readability */
-    --text-light: #f5f5f5; /* Light gray for contrast */
-    --text-muted: #777777; /* Muted gray for secondary text */
+    --text-dark:rgb(0, 0, 0); /* Dark gray for readability */
+    --text-light:rgb(255, 255, 255); /* Light gray for contrast */
+    --text-muted: #000000; /* Muted gray for secondary text */
 
     /* Background Colors */
     --bg-light: #f0f4f8; /* Light, soft background */
@@ -56,7 +56,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-image: url('../assets/bcimage.png'); /* Restored background image */
     background-size: cover;
     background-position: center;
@@ -93,8 +93,14 @@ body {
     border: 1px solid var(--border-color); /* Subtle border */
     max-height: 90vh; /* Limit height for scrollability */
     overflow-y: auto; /* Make form scrollable */
+   
 }
-
+::-webkit-scrollbar {
+    display: none;
+}
+* {
+    scrollbar-width: none;
+}
 /* Header Elements */
 .auth-header {
     text-align: center;
@@ -102,10 +108,10 @@ body {
 }
 
 .logo {
-    width: 120px; /* Smaller for mobile */
-    height: 120px;
+    width: 220px; /* Smaller for mobile */
+    height: 220px;
     margin-bottom: var(--spacing-md);
-    border-radius: 50%;
+    border-radius:  10%;
     box-shadow: 0 6px 15px var(--shadow-color);
     transition: var(--transition-medium);
 }
@@ -122,8 +128,8 @@ h1 {
 }
 
 .subtitle {
-    color: var(--text-muted);
-    font-size: 0.9rem; /* Smaller for mobile */
+    color: #000000;
+    font-size: 1.1rem; /* Smaller for mobile */
     opacity: 0.9;
     max-width: 80%;
     margin: 0 auto;
@@ -142,7 +148,7 @@ h1 {
     padding: var(--spacing-md);
     background: none;
     border: none;
-    color: var(--text-muted);
+    color: #333333;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;

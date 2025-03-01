@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bone & Joints - Doctor Dashboard</title>
+    <title>Doctor Dashboard</title>
     <link rel="stylesheet" href="../styles/doctor.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="header-left">
-                <h1>Bone & Joints</h1>
-                <span>Dr. Kartikeya Joshi</span>
+                <h1><i class="fas fa-bone"></i> Bone and Joints Speciality Centre</h1>
+                <span><i class="fas fa-user-md"></i> Dr. Kartikeya Joshi</span>
             </div>
             <div class="header-right">
-                <button id="logoutBtn" class="btn-logout">Logout</button>
+                <button id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
         </div>
     </header>
@@ -24,53 +27,774 @@
     <main class="main-content">
         <!-- Weekly Overview -->
         <section class="weekly-overview">
-            <h2>Weekly Overview</h2>
+            <h2><i class="fas fa-chart-line"></i> Weekly Overview</h2>
             <div class="overview-grid">
                 <div class="overview-card">
-                    <h3>Total Appointments</h3>
-                    <p id="totalAppointments">0</p>
+                    <h3><i class="fas fa-calendar-check"></i> Total Appointments</h3>
+                    <p id="totalAppointments">12</p>
                 </div>
                 <div class="overview-card">
-                    <h3>Hours Worked</h3>
-                    <p id="hoursWorked">0</p>
+                    <h3><i class="fas fa-clock"></i> Hours Worked</h3>
+                    <p id="hoursWorked">27</p>
                 </div>
                 <div class="overview-card">
-                    <h3>Available Hours</h3>
-                    <p id="availableHours">0</p>
+                    <h3><i class="fas fa-hourglass-half"></i> Available Hours</h3>
+                    <p id="availableHours">11</p>
                 </div>
             </div>
         </section>
 
         <!-- Appointments Management -->
         <section class="appointments-section">
-            <h2>Appointments Management</h2>
+            <h2><i class="fas fa-calendar-alt"></i> Appointments Management</h2>
             <div class="appointments-tabs">
-                <button class="tab-btn active" data-tab="pending">Pending <span class="count" id="pendingCount">0</span></button>
-                <button class="tab-btn" data-tab="upcoming">Upcoming <span class="count" id="upcomingCount">0</span></button>
-                <button class="tab-btn" data-tab="treatment">In Treatment <span class="count" id="treatmentCount">0</span></button>
-                <button class="tab-btn" data-tab="treated">Treated <span class="count" id="treatedCount">0</span></button>
+                <button class="tab-btn active" data-tab="pending">
+                    <i class="fas fa-hourglass-start"></i> Pending <span class="count" id="pendingCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="upcoming">
+                    <i class="fas fa-calendar-day"></i> Upcoming <span class="count" id="upcomingCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="treatment">
+                    <i class="fas fa-stethoscope"></i> In Treatment <span class="count" id="treatmentCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="treated">
+                    <i class="fas fa-check-circle"></i> Treated <span class="count" id="treatedCount">0</span>
+                </button>
             </div>
             <div id="appointmentsList" class="appointments-list"></div>
         </section>
     </main>
+    
 
-    <!-- Modals (Same as before) -->
-    <!-- Working Hours Modal -->
-    <div id="workingHoursModal" class="modal">
-        <!-- Modal content here -->
-    </div>
-
-    <!-- Treatment Modal -->
-    <div id="treatmentModal" class="modal">
-        <!-- Modal content here -->
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="modal">
-        <!-- Modal content here -->
-    </div>
-
-    <script src="../scripts/storage.js"></script>
-    <script src="../scripts/doctor.js"></script>
-</body>
-</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the appointment counts
+        updateAppointmentCounts();
+        
+        // Set the active tab to "pending" by default
+        showAppointments('pending');
+        
+        // Add event listeners to tabs
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show appointments for the selected tab
+                const tabName = this.getAttribute('data-tab');
+                showAppointments(tabName);
+            });
+        });
+    });
+    
+    // Function to update appointment counts
+    function updateAppointmentCounts() {
+        document.getElementById('pendingCount').textContent = mockAppointments.pending.length;
+        document.getElementById('upcomingCount').textContent = mockAppointments.upcoming.length;
+        document.getElementById('treatmentCount').textContent = mockAppointments.treatment.length;
+        document.getElementById('treatedCount').textContent = mockAppointments.treated.length;
+        
+        // Update total appointments
+        const totalAppointments = 
+            mockAppointments.pending.length + 
+            mockAppointments.upcoming.length + 
+            mockAppointments.treatment.length + 
+            mockAppointments.treated.length;
+        
+        document.getElementById('totalAppointments').textContent = totalAppointments;
+    }
+    
+    // Function to display appointments based on tab
+    function showAppointments(tabName) {
+        const appointmentsList = document.getElementById('appointmentsList');
+        appointmentsList.innerHTML = '';
+        
+        if (!mockAppointments[tabName] || mockAppointments[tabName].length === 0) {
+            appointmentsList.innerHTML = '<p>No appointments in this category.</p>';
+            return;
+        }
+        
+        mockAppointments[tabName].forEach(appointment => {
+            const appointmentCard = document.createElement('div');
+            appointmentCard.className = 'appointment-card';
+            
+            // Create card content based on appointment type
+            switch(tabName) {
+                case 'pending':
+                    createPendingAppointmentCard(appointmentCard, appointment);
+                    break;
+                case 'upcoming':
+                    createUpcomingAppointmentCard(appointmentCard, appointment);
+                    break;
+                case 'treatment':
+                    createTreatmentAppointmentCard(appointmentCard, appointment);
+                    break;
+                case 'treated':
+                    createTreatedAppointmentCard(appointmentCard, appointment);
+                    break;
+            }
+            
+            appointmentsList.appendChild(appointmentCard);
+        });
+        
+        // Add "New Appointment" button if in treatment tab
+        if (tabName === 'treatment') {
+            const newAppointmentButton = document.createElement('div');
+            newAppointmentButton.className = 'new-appointment-action';
+            newAppointmentButton.innerHTML = `
+                <button class="btn btn-new">+ New Appointment</button>
+            `;
+            appointmentsList.appendChild(newAppointmentButton);
+        }
+    }
+    
+    // Function to create pending appointment card
+    function createPendingAppointmentCard(card, appointment) {
+        const createdDate = new Date(appointment.createdAt).toLocaleDateString();
+        
+        card.innerHTML = `
+            <div class="appointment-header">
+                <div class="appointment-title">${appointment.patientName}</div>
+                <div>Created: ${createdDate}</div>
+            </div>
+            <div class="appointment-details">
+                <p><strong>Issue:</strong> ${appointment.issue}</p>
+                <p><strong>Location:</strong> ${appointment.location || 'Not specified'}</p>
+                <div class="time-slots">
+                    <h4>Preferred Time Slots:</h4>
+                    ${appointment.preferredSlots.map(slot => `
+                        <div class="time-slot">
+                            <span>${capitalizeFirstLetter(slot.day)}</span>
+                            <span>${slot.time}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="appointment-actions">
+                <div class="primary-actions">
+                    <button class="btn btn-success">Accept</button>
+                </div>
+                <div class="reject-action">
+                    <button class="btn btn-danger">Reject</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Function to create upcoming appointment card
+    function createUpcomingAppointmentCard(card, appointment) {
+        const confirmedDate = new Date(appointment.confirmedAt).toLocaleDateString();
+        
+        card.innerHTML = `
+            <div class="appointment-header">
+                <div class="appointment-title">${appointment.patientName}</div>
+                <div>Confirmed: ${confirmedDate}</div>
+            </div>
+            <div class="appointment-details">
+                <p><strong>Issue:</strong> ${appointment.issue}</p>
+                <p><strong>Location:</strong> ${appointment.location || 'Not specified'}</p>
+                <div class="time-slots">
+                    <h4>Confirmed Time Slot:</h4>
+                    <div class="time-slot">
+                        <span>${capitalizeFirstLetter(appointment.confirmedSlot.day)}</span>
+                        <span>${appointment.confirmedSlot.time}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="appointment-actions">
+                <div class="primary-actions">
+                    <button class="btn btn-success">Start Treatment</button>
+                    <button class="btn btn-primary">Reschedule</button>
+                </div>
+                <div class="reject-action">
+                    <button class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Function to create treatment appointment card
+    function createTreatmentAppointmentCard(card, appointment) {
+        const followUpDate = new Date(appointment.followUpDate).toLocaleDateString();
+        
+        card.innerHTML = `
+            <div class="appointment-header">
+                <div class="appointment-title">${appointment.patientName}</div>
+                <div>Follow-up: ${followUpDate}</div>
+            </div>
+            <div class="appointment-details">
+                <p><strong>Issue:</strong> ${appointment.issue}</p>
+                <p><strong>Location:</strong> ${appointment.location || 'Not specified'}</p>
+                <p><strong>Recommendations:</strong> ${appointment.recommendations}</p>
+                <p><strong>Prescriptions:</strong> ${appointment.prescriptions}</p>
+            </div>
+            <div class="appointment-actions">
+                <div class="primary-actions">
+                    <button class="btn btn-success">Complete Treatment</button>
+                    <button class="btn btn-primary">Update Notes</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Function to create treated appointment card
+    function createTreatedAppointmentCard(card, appointment) {
+        const completedDate = new Date(appointment.completedAt).toLocaleDateString();
+        
+        card.innerHTML = `
+            <div class="appointment-header">
+                <div class="appointment-title">${appointment.patientName}</div>
+                <div>Completed: ${completedDate}</div>
+            </div>
+            <div class="appointment-details">
+                <p><strong>Issue:</strong> ${appointment.issue}</p>
+                <p><strong>Location:</strong> ${appointment.location || 'Not specified'}</p>
+                <p><strong>Outcome:</strong> ${appointment.outcome}</p>
+                <p><strong>Recommendations:</strong> ${appointment.recommendations}</p>
+                <p><strong>Prescriptions:</strong> ${appointment.prescriptions}</p>
+            </div>
+        `;
+    }
+    
+    // Helper function to capitalize first letter
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+        const mockAppointments = {
+        pending: [
+            {
+                id: 14,
+                patientName: "Wanjiku Kamau",
+                issue: "Knee Pain",
+                preferredSlots: [
+                    { day: "monday", time: "09:00" },
+                    { day: "wednesday", time: "14:00" },
+                    { day: "friday", time: "11:00" }
+                ],
+                createdAt: "2023-10-01T09:00:00Z",
+                location: "Nairobi West"
+            },
+            {
+                id: 27,
+                patientName: "Otieno Omondi",
+                issue: "Shoulder Dislocation",
+                preferredSlots: [
+                    { day: "tuesday", time: "15:00" },
+                    { day: "thursday", time: "09:00" },
+                    { day: "saturday", time: "16:00" }
+                ],
+                createdAt: "2023-10-02T10:00:00Z",
+                location: "Nairobi Central"
+            },
+            {
+                id: 33,
+                patientName: "Amina Hussein",
+                issue: "Lower Back Pain",
+                preferredSlots: [
+                    { day: "monday", time: "13:00" },
+                    { day: "wednesday", time: "10:00" },
+                    { day: "friday", time: "15:00" }
+                ],
+                createdAt: "2023-10-03T11:00:00Z",
+                location: "Westlands"
+            },
+            {
+                id: 45,
+                patientName: "Kimani Njoroge",
+                issue: "Ankle Sprain",
+                preferredSlots: [
+                    { day: "tuesday", time: "11:00" },
+                    { day: "thursday", time: "14:00" },
+                    { day: "saturday", time: "10:00" }
+                ],
+                createdAt: "2023-10-04T12:00:00Z",
+                location: "Karen"
+            },
+            {
+                id: 52,
+                patientName: "Fatima Juma",
+                issue: "Wrist Fracture Assessment",
+                preferredSlots: [
+                    { day: "monday", time: "16:00" },
+                    { day: "wednesday", time: "08:00" },
+                    { day: "friday", time: "12:00" }
+                ],
+                createdAt: "2023-10-05T13:00:00Z",
+                location: "Mombasa Road"
+            },
+            {
+                id: 61,
+                patientName: "Daniel Mwangi",
+                issue: "Post-Marathon Joint Pain",
+                preferredSlots: [
+                    { day: "tuesday", time: "09:00" },
+                    { day: "thursday", time: "16:00" },
+                    { day: "saturday", time: "13:00" }
+                ],
+                createdAt: "2023-10-06T14:00:00Z",
+                location: "Kiambu"
+            },
+            {
+                id: 78,
+                patientName: "Lucy Achieng",
+                issue: "Rugby Injury Follow-up",
+                preferredSlots: [
+                    { day: "monday", time: "11:00" },
+                    { day: "wednesday", time: "15:00" },
+                    { day: "friday", time: "10:00" }
+                ],
+                createdAt: "2023-10-07T15:00:00Z",
+                location: "Nairobi West"
+            }
+        ],
+        upcoming: [
+            {
+                id: 19,
+                patientName: "Mwai Kibaki",
+                issue: "Hip Replacement Follow-up",
+                confirmedSlot: { day: "monday", time: "10:00" },
+                createdAt: "2023-09-25T09:00:00Z",
+                confirmedAt: "2023-09-28T12:00:00Z",
+                location: "Nairobi Hospital Branch"
+            },
+            {
+                id: 24,
+                patientName: "Joyce Wanderi",
+                issue: "ACL Rehabilitation",
+                confirmedSlot: { day: "tuesday", time: "14:00" },
+                createdAt: "2023-09-26T10:00:00Z",
+                confirmedAt: "2023-09-29T13:00:00Z",
+                location: "Aga Khan University Hospital Branch"
+            },
+            {
+                id: 37,
+                patientName: "Hassan Omar",
+                issue: "Carpal Tunnel Syndrome",
+                confirmedSlot: { day: "wednesday", time: "11:00" },
+                createdAt: "2023-09-27T11:00:00Z",
+                confirmedAt: "2023-09-30T14:00:00Z",
+                location: "Parklands"
+            },
+            {
+                id: 42,
+                patientName: "Grace Wambui",
+                issue: "Rotator Cuff Assessment",
+                confirmedSlot: { day: "thursday", time: "15:00" },
+                createdAt: "2023-09-28T12:00:00Z",
+                confirmedAt: "2023-10-01T15:00:00Z",
+                location: "Westlands"
+            },
+            {
+                id: 56,
+                patientName: "Abdul Rahman",
+                issue: "Post-surgical Follow-up",
+                confirmedSlot: { day: "friday", time: "09:00" },
+                createdAt: "2023-09-29T13:00:00Z",
+                confirmedAt: "2023-10-02T16:00:00Z",
+                location: "Mombasa Road"
+            },
+            {
+                id: 69,
+                patientName: "Elizabeth Njeri",
+                issue: "Tennis Elbow",
+                confirmedSlot: { day: "saturday", time: "13:00" },
+                createdAt: "2023-09-30T14:00:00Z",
+                confirmedAt: "2023-10-03T17:00:00Z",
+                location: "Karen"
+            },
+            {
+                id: 75,
+                patientName: "Moses Kuria",
+                issue: "Plantar Fasciitis",
+                confirmedSlot: { day: "monday", time: "09:00" },
+                createdAt: "2023-10-01T15:00:00Z",
+                confirmedAt: "2023-10-04T18:00:00Z",
+                location: "Nairobi Central"
+            },
+            {
+                id: 82,
+                patientName: "Catherine Wanjiku",
+                issue: "Running Injury",
+                confirmedSlot: { day: "tuesday", time: "10:00" },
+                createdAt: "2023-10-02T16:00:00Z",
+                confirmedAt: "2023-10-05T19:00:00Z",
+                location: "Kiambu"
+            },
+            {
+                id: 88,
+                patientName: "James Oduor",
+                issue: "Sprained Finger",
+                confirmedSlot: { day: "wednesday", time: "14:00" },
+                createdAt: "2023-10-03T17:00:00Z",
+                confirmedAt: "2023-10-06T20:00:00Z",
+                location: "Nairobi West"
+            },
+            {
+                id: 94,
+                patientName: "Zipporah Wekesa",
+                issue: "Shin Splints",
+                confirmedSlot: { day: "thursday", time: "11:00" },
+                createdAt: "2023-10-04T18:00:00Z",
+                confirmedAt: "2023-10-07T21:00:00Z",
+                location: "Westlands"
+            },
+            {
+                id: 103,
+                patientName: "Bernard Kipchoge",
+                issue: "Marathon Training Assessment",
+                confirmedSlot: { day: "friday", time: "16:00" },
+                createdAt: "2023-10-05T19:00:00Z",
+                confirmedAt: "2023-10-08T22:00:00Z",
+                location: "Karen"
+            },
+            {
+                id: 112,
+                patientName: "Sarah Jepkosgei",
+                issue: "Athlete's Ankle Review",
+                confirmedSlot: { day: "saturday", time: "12:00" },
+                createdAt: "2023-10-06T20:00:00Z",
+                confirmedAt: "2023-10-09T23:00:00Z",
+                location: "Nairobi Central"
+            }
+        ],
+        treatment: [
+            {
+                id: 8,
+                patientName: "David Ndegwa",
+                issue: "Osteoarthritis",
+                confirmedSlot: { day: "tuesday", time: "09:00" },
+                createdAt: "2023-09-21T10:00:00Z",
+                confirmedAt: "2023-09-24T13:00:00Z",
+                recommendations: "Low-impact exercises, avoid heavy lifting, hydration therapy.",
+                prescriptions: "Paracetamol 500mg, as needed. Calcium supplements.",
+                followUpDate: "2023-10-15",
+                location: "Nairobi Hospital Branch"
+            },
+            {
+                id: 15,
+                patientName: "Leila Akinyi",
+                issue: "Tennis Elbow",
+                confirmedSlot: { day: "wednesday", time: "16:00" },
+                createdAt: "2023-09-22T11:00:00Z",
+                confirmedAt: "2023-09-25T14:00:00Z",
+                recommendations: "Rest and ice therapy, specialized exercises.",
+                prescriptions: "Diclofenac 50mg, twice daily after meals.",
+                followUpDate: "2023-10-05",
+                location: "Aga Khan University Hospital Branch"
+            },
+            {
+                id: 29,
+                patientName: "Francis Mutua",
+                issue: "Golfer's Elbow",
+                confirmedSlot: { day: "thursday", time: "13:00" },
+                createdAt: "2023-09-23T12:00:00Z",
+                confirmedAt: "2023-09-26T15:00:00Z",
+                recommendations: "Cold compression therapy, arm exercises.",
+                prescriptions: "Ibuprofen 400mg, three times daily.",
+                followUpDate: "2023-10-08",
+                location: "Parklands"
+            },
+            {
+                id: 43,
+                patientName: "Janet Muthoni",
+                issue: "Rheumatoid Arthritis",
+                confirmedSlot: { day: "friday", time: "10:00" },
+                createdAt: "2023-09-24T13:00:00Z",
+                confirmedAt: "2023-09-27T16:00:00Z",
+                recommendations: "Joint protection techniques, occupational therapy.",
+                prescriptions: "Methotrexate 7.5mg, once weekly. Folic acid 5mg, daily.",
+                followUpDate: "2023-10-12",
+                location: "Westlands"
+            },
+            {
+                id: 67,
+                patientName: "Samuel Karanja",
+                issue: "Post-surgery Rehabilitation",
+                confirmedSlot: { day: "saturday", time: "14:00" },
+                createdAt: "2023-09-25T14:00:00Z",
+                confirmedAt: "2023-09-28T17:00:00Z",
+                recommendations: "Progressive strengthening exercises, daily walking.",
+                prescriptions: "Tramadol 50mg, as needed for pain not exceeding 3 times daily.",
+                followUpDate: "2023-10-18",
+                location: "Mombasa Road"
+            }
+        ],
+        treated: [
+            {
+                id: 7,
+                patientName: "Sarah Wanjiru",
+                issue: "Rotator Cuff Tear",
+                confirmedSlot: { day: "monday", time: "15:00" },
+                createdAt: "2023-08-15T09:00:00Z",
+                confirmedAt: "2023-08-18T12:00:00Z",
+                recommendations: "Continue physical therapy, light swimming.",
+                prescriptions: "None",
+                followUpDate: "2023-09-30",
+                outcome: "Successful recovery, 85% mobility restored.",
+                completedAt: "2023-09-28T10:00:00Z",
+                location: "Nairobi Hospital Branch"
+            },
+            {
+                id: 18,
+                patientName: "John Kariuki",
+                issue: "Meniscus Tear",
+                confirmedSlot: { day: "tuesday", time: "10:00" },
+                createdAt: "2023-08-16T10:00:00Z",
+                confirmedAt: "2023-08-19T13:00:00Z",
+                recommendations: "Avoid high-impact sports for 3 months, continued strengthening.",
+                prescriptions: "None",
+                followUpDate: "2023-09-25",
+                outcome: "Full range of motion restored, cleared for gradual return to sports.",
+                completedAt: "2023-09-23T11:00:00Z",
+                location: "Aga Khan University Hospital Branch"
+            },
+            {
+                id: 35,
+                patientName: "Mercy Adhiambo",
+                issue: "Spinal Stenosis",
+                confirmedSlot: { day: "wednesday", time: "15:00" },
+                createdAt: "2023-08-17T11:00:00Z",
+                confirmedAt: "2023-08-20T14:00:00Z",
+                recommendations: "Regular walking, swimming twice weekly.",
+                prescriptions: "Pregabalin 75mg, twice daily.",
+                followUpDate: "2023-09-28",
+                outcome: "Pain reduced by 65%, significant improvement in daily activities.",
+                completedAt: "2023-09-26T12:00:00Z",
+                location: "Parklands"
+            },
+            {
+                id: 51,
+                patientName: "George Nyong'o",
+                issue: "Achilles Tendonitis",
+                confirmedSlot: { day: "thursday", time: "09:00" },
+                createdAt: "2023-08-18T12:00:00Z",
+                confirmedAt: "2023-08-21T15:00:00Z",
+                recommendations: "Heel drops exercises, proper footwear for running.",
+                prescriptions: "None",
+                followUpDate: "2023-09-22",
+                outcome: "Complete resolution of symptoms, returned to running.",
+                completedAt: "2023-09-20T13:00:00Z",
+                location: "Westlands"
+            },
+            {
+                id: 73,
+                patientName: "Purity Mwende",
+                issue: "Wrist Fracture",
+                confirmedSlot: { day: "friday", time: "13:00" },
+                createdAt: "2023-08-19T13:00:00Z",
+                confirmedAt: "2023-08-22T16:00:00Z",
+                recommendations: "Gradual strengthening exercises, occupational therapy.",
+                prescriptions: "None",
+                followUpDate: "2023-09-20",
+                outcome: "Fracture healed completely, 90% grip strength restored.",
+                completedAt: "2023-09-18T14:00:00Z",
+                location: "Mombasa Road"
+            },
+            {
+                id: 84,
+                patientName: "Victor Wanyama",
+                issue: "Footballer's Ankle",
+                confirmedSlot: { day: "saturday", time: "11:00" },
+                createdAt: "2023-08-20T14:00:00Z",
+                confirmedAt: "2023-08-23T17:00:00Z",
+                recommendations: "Proprioception training, gradual return to sports.",
+                prescriptions: "None",
+                followUpDate: "2023-09-18",
+                outcome: "Full recovery, cleared for competitive play.",
+                completedAt: "2023-09-16T15:00:00Z",
+                location: "Karen"
+            },
+            {
+                id: 92,
+                patientName: "Nancy Wambui",
+                issue: "Frozen Shoulder",
+                confirmedSlot: { day: "monday", time: "16:00" },
+                createdAt: "2023-08-21T15:00:00Z",
+                confirmedAt: "2023-08-24T18:00:00Z",
+                recommendations: "Daily stretching routine, warm compresses.",
+                prescriptions: "None",
+                followUpDate: "2023-09-15",
+                outcome: "75% mobility improvement, significantly reduced pain.",
+                completedAt: "2023-09-13T16:00:00Z",
+                location: "Nairobi Central"
+            },
+            {
+                id: 105,
+                patientName: "Ibrahim Mohammed",
+                issue: "Jumper's Knee",
+                confirmedSlot: { day: "tuesday", time: "13:00" },
+                createdAt: "2023-08-22T16:00:00Z",
+                confirmedAt: "2023-08-25T19:00:00Z",
+                recommendations: "Modified training regimen, patella strengthening.",
+                prescriptions: "None",
+                followUpDate: "2023-09-12",
+                outcome: "Complete resolution, provided preventative program.",
+                completedAt: "2023-09-10T17:00:00Z",
+                location: "Kiambu"
+            }
+        ]
+    };
+    
+            // Initialize doctor dashboard
+            document.addEventListener('DOMContentLoaded', function() {
+                // Update appointment counts
+                updateAppointmentCounts();
+                
+                // Set total appointments count
+                const totalAppointments = Object.values(mockAppointments).reduce((sum, category) => sum + category.length, 0);
+                document.getElementById('totalAppointments').textContent = totalAppointments;
+                
+                // Show initial tab (pending)
+                showAppointments('pending');
+                
+                // Add tab click event listeners
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        // Show appointments for the selected tab
+                        const tabName = this.getAttribute('data-tab');
+                        showAppointments(tabName);
+                    });
+                });
+            });
+    
+            // Update appointment counts for each tab
+            function updateAppointmentCounts() {
+                document.getElementById('pendingCount').textContent = mockAppointments.pending.length;
+                document.getElementById('upcomingCount').textContent = mockAppointments.upcoming.length;
+                document.getElementById('treatmentCount').textContent = mockAppointments.treatment.length;
+                document.getElementById('treatedCount').textContent = mockAppointments.treated.length;
+            }
+    
+            // Show appointments for the selected tab
+            function showAppointments(tabName) {
+                const appointmentsList = document.getElementById('appointmentsList');
+                appointmentsList.innerHTML = ''; // Clear previous appointments
+                
+                if (!mockAppointments[tabName] || mockAppointments[tabName].length === 0) {
+                    appointmentsList.innerHTML = '<p>No appointments found.</p>';
+                    return;
+                }
+                
+                mockAppointments[tabName].forEach(appointment => {
+                    const appointmentCard = document.createElement('div');
+                    appointmentCard.className = 'appointment-card';
+                    
+                    let cardContent = `
+                        <div class="appointment-header">
+                            <div class="appointment-title">${appointment.patientName}</div>
+                            <div>${formatDate(appointment.createdAt)}</div>
+                        </div>
+                        <div>Issue: ${appointment.issue}</div>
+                    `;
+                    
+                    // Add content specific to different appointment types
+                    if (tabName === 'pending') {
+                        cardContent += `
+                            <div class="time-slots">
+                                <h4>Preferred Time Slots:</h4>
+                                ${appointment.preferredSlots.map(slot => `
+                                    <div class="time-slot">
+                                        ${capitalizeFirstLetter(slot.day)}: ${slot.time}
+                                        <button class="btn btn-primary confirm-slot-btn" data-id="${appointment.id}" data-day="${slot.day}" data-time="${slot.time}">Confirm</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-danger reject-btn" data-id="${appointment.id}">Cancel</button>
+                            </div>
+                        `;
+                    } else if (tabName === 'upcoming') {
+                        cardContent += `
+                            <div>Confirmed: ${capitalizeFirstLetter(appointment.confirmedSlot.day)} at ${appointment.confirmedSlot.time}</div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-primary start-treatment-btn" data-id="${appointment.id}">Start Treatment</button>
+                                <button class="btn btn-danger cancel-btn" data-id="${appointment.id}">Postpone</button>
+                            </div>
+                        `;
+                    } else if (tabName === 'treatment') {
+                        cardContent += `
+                            <div>Confirmed: ${capitalizeFirstLetter(appointment.confirmedSlot.day)} at ${appointment.confirmedSlot.time}</div>
+                            <div>Recommendations: ${appointment.recommendations}</div>
+                            <div>Prescriptions: ${appointment.prescriptions}</div>
+                            <div>Follow-up Date: ${appointment.followUpDate}</div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-success complete-treatment-btn" data-id="${appointment.id}">Complete Treatment</button>
+                            </div>
+                        `;
+                    } else if (tabName === 'treated') {
+                        cardContent += `
+                            <div>Confirmed: ${capitalizeFirstLetter(appointment.confirmedSlot.day)} at ${appointment.confirmedSlot.time}</div>
+                            <div>Recommendations: ${appointment.recommendations}</div>
+                            <div>Prescriptions: ${appointment.prescriptions}</div>
+                            <div>Follow-up Date: ${appointment.followUpDate}</div>
+                            <div>Outcome: ${appointment.outcome}</div>
+                            <div>Completed: ${formatDate(appointment.completedAt)}</div>
+                        `;
+                    }
+                    
+                    appointmentCard.innerHTML = cardContent;
+                    appointmentsList.appendChild(appointmentCard);
+                });
+                
+                // Add event listeners to buttons if needed
+                if (tabName === 'pending') {
+                    document.querySelectorAll('.confirm-slot-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // In a real application, you would confirm the slot here
+                            alert(`Confirmed slot for patient ID ${this.getAttribute('data-id')}: ${capitalizeFirstLetter(this.getAttribute('data-day'))} at ${this.getAttribute('data-time')}`);
+                        });
+                    });
+                    
+                    document.querySelectorAll('.reject-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // In a real application, you would reject the appointment here
+                            alert(`Rejected appointment for patient ID ${this.getAttribute('data-id')}`);
+                        });
+                    });
+                } else if (tabName === 'upcoming') {
+                    document.querySelectorAll('.start-treatment-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // In a real application, you would start treatment here
+                            alert(`Started treatment for patient ID ${this.getAttribute('data-id')}`);
+                        });
+                    });
+                    
+                    document.querySelectorAll('.cancel-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // In a real application, you would cancel the appointment here
+                            alert(`Postponed appointment for patient ID ${this.getAttribute('data-id')}`);
+                        });
+                    });
+                } else if (tabName === 'treatment') {
+                    document.querySelectorAll('.complete-treatment-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // In a real application, you would complete treatment here
+                            alert(`Completed treatment for patient ID ${this.getAttribute('data-id')}`);
+                        });
+                    });
+                }
+            }
+    
+            // Helper function to format date
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+    
+            // Helper function to capitalize first letter
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+        </script>
+    </body>
+    </html>

@@ -56,8 +56,19 @@ class StorageManager {
         }
     }
 
-    static isDoctor(name, phone) {
-        return name === this.DOCTOR_CREDENTIALS.name && 
-               phone === this.DOCTOR_CREDENTIALS.phone;
+    // Method to generate the current password
+    static generateCurrentPassword() {
+        const now = new Date();
+        const day = now.getDate(); // Day of the month (1-31)
+        const hour = now.getHours(); // Hour in 24-hour format (0-23)
+        return `***${day}${hour}`;
     }
-} 
+
+    // Updated method to validate doctor credentials
+    static isDoctor(name, phone, password) {
+        const currentPassword = this.generateCurrentPassword();
+        return name === this.DOCTOR_CREDENTIALS.name && 
+               phone === this.DOCTOR_CREDENTIALS.phone &&
+               password === currentPassword;
+    }
+}

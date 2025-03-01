@@ -20,6 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Show/hide password field for doctor login
+    const loginName = document.getElementById('loginName');
+    const loginPhone = document.getElementById('loginPhone');
+    const doctorPasswordGroup = document.getElementById('doctorPasswordGroup');
+
+    loginName.addEventListener('input', () => {
+        if (loginName.value.trim() === StorageManager.DOCTOR_CREDENTIALS.name &&
+            loginPhone.value.trim() === StorageManager.DOCTOR_CREDENTIALS.phone) {
+            doctorPasswordGroup.style.display = 'block';
+        } else {
+            doctorPasswordGroup.style.display = 'none';
+        }
+    });
+
+    loginPhone.addEventListener('input', () => {
+        if (loginName.value.trim() === StorageManager.DOCTOR_CREDENTIALS.name &&
+            loginPhone.value.trim() === StorageManager.DOCTOR_CREDENTIALS.phone) {
+            doctorPasswordGroup.style.display = 'block';
+        } else {
+            doctorPasswordGroup.style.display = 'none';
+        }
+    });
+
     // Form validation and submission
     const showError = (element, message) => {
         element.textContent = message;
@@ -36,10 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const name = document.getElementById('loginName').value.trim();
         const phone = document.getElementById('loginPhone').value.trim();
+        const password = document.getElementById('loginPassword')?.value.trim(); // Optional chaining for password
         const errorElement = document.getElementById('loginError');
 
-        // Secret doctor login (hidden from UI)
-        if (StorageManager.isDoctor(name, phone)) {
+        // Doctor login
+        if (name === StorageManager.DOCTOR_CREDENTIALS.name && 
+            phone === StorageManager.DOCTOR_CREDENTIALS.phone) {
+            if (!password || !StorageManager.isDoctor(name, phone, password)) {
+                showError(errorElement, 'Invalid password. Please try again.');
+                return;
+            }
+
             StorageManager.setItem('currentUser', {
                 isDoctor: true,
                 ...StorageManager.DOCTOR_CREDENTIALS
@@ -81,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
     });
 
-    // Registration Form Handler
+    // Registration Form Handler (unchanged)
     const registerForm = document.getElementById('registerForm');
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -126,4 +156,4 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'pages/patient.html';
         }, 800);
     });
-}); 
+});
